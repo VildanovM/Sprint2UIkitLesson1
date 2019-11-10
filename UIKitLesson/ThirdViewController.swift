@@ -40,6 +40,14 @@ class ThirdViewController: UIViewController {
     }
     
     @objc func gradientChange(sender: UIPanGestureRecognizer) {
+        
+        let point:CGPoint = sender.translation(in: self.view)
+        sender.setTranslation(CGPoint.zero, in: self.view)
+        let gradientY = circleGesture.frame.origin.y + point.y
+        let gradientX = circleGesture.frame.origin.x + point.x
+        circleGesture.frame = CGRect(x: gradientX, y: gradientY, width: circleGesture.frame.width, height: circleGesture.frame.height)
+        GradientView.animate(withDuration: 0.05, animations: { self.view.layoutIfNeeded() })
+        
         let locationY = Float(sender.location(in: circleGesture).y)
         let locationX = Float(sender.location(in: circleGesture).x)
         let firstColor = UIColor(red: CGFloat(locationY/255), green: CGFloat(locationY/255), blue: CGFloat(locationY/255), alpha: 1)
@@ -50,7 +58,7 @@ class ThirdViewController: UIViewController {
     
     
     @objc func popViewController() {
-        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
 

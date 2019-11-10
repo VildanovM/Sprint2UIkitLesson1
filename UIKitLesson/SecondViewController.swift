@@ -28,7 +28,9 @@ class SecondViewController: UIViewController {
 	}
     
     @objc func goToThirdVC() {
-        navigationController?.pushViewController(ThirdViewController(), animated: true)
+        let thirdVC = ThirdViewController()
+        thirdVC.modalPresentationStyle = .fullScreen
+        present(thirdVC, animated: true)
     }
 
 	override func viewWillAppear(_ animated: Bool) {
